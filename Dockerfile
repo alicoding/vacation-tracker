@@ -10,9 +10,6 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install gunicorn for production serving
-RUN pip install gunicorn
-
 # Copy the application code
 COPY . .
 
@@ -28,11 +25,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PORT=8080 \
     DATABASE_PATH=/data/vacation.db
 
-# Install runtime dependencies
+# Install runtime dependencies and gunicorn
 RUN apt-get update && apt-get install -y --no-install-recommends \
     tini \
     sqlite3 \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir gunicorn
 
 # Copy built artifacts from builder stage
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
