@@ -1,0 +1,82 @@
+<!-- Improved sidebar structure -->
+<div class="sidebar">
+    <h2>Vacation Overview</h2>
+    
+    <!-- Date picker with tooltips and indicators -->
+    <div class="date-picker">
+        <h3><i class="bi bi-calendar3"></i> Calendar</h3>
+        <div class="sidebar-calendar-wrapper">
+            <!-- The element we attach Flatpickr to -->
+            <input type="text" id="sidebar-calendar-input" class="flatpickr-input d-none" />
+            <!-- The calendar container with properly escaped JSON data -->
+            <div id="sidebar-calendar-container" class="mb-3 sidebar-calendar-container"
+                 data-booked-dates='{{ booked_dates_json|safe }}'
+                 data-holidays='{{ holiday_dates_json|safe }}'
+                 data-ontario-holidays='{{ ontario_holidays_json|default("[]")|safe }}'></div>
+        </div>
+        <div class="calendar-legend">
+            <div class="d-flex align-items-center mb-1">
+                <div class="legend-swatch booked-date me-2"></div>
+                <div>Booked Vacation</div>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <div class="legend-swatch holiday-date me-2"></div>
+                <div>Bank Holiday</div>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <div class="legend-swatch ontario-holiday-date me-2"></div>
+                <div>Ontario Holiday</div>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="legend-swatch overlap-date me-2"></div>
+                <div>Vacation + Holiday</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Holiday list with de-duplicated entries -->
+    <div class="holiday-list mt-4">
+        <div class="holiday-sidebar-header">
+            <h3><i class="bi bi-calendar-check"></i> Upcoming Holidays</h3>
+            <a href="{{ url_for('holiday.refresh_holidays') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-clockwise"></i> Refresh
+            </a>
+        </div>
+        
+        {% if last_holiday_update %}
+        <div class="text-muted small mb-2">Last updated: {{ last_holiday_update | date }}</div>
+        {% endif %}
+        
+        {% for holiday in holidays %}
+        <div class="holiday-entry{% if holiday.is_bank_holiday %} bank-holiday{% endif %}{% if holiday.is_ontario_holiday %} ontario-holiday{% endif %}{% if holiday.overlaps_vacation %} holiday-vacation-overlap{% endif %}{% if holiday.is_adjacent_to_vacation %} holiday-vacation-adjacent{% endif %}"
+             data-date="{{ holiday.date_iso }}">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="date fw-bold">{{ holiday.date }}</div>
+                    <div class="description">
+                        {{ holiday.name }}
+                        {% if holiday.is_bank_holiday %}
+                            <span class="holiday-tag bank-holiday-tag">Bank</span>
+                        {% endif %}
+                        {% if holiday.is_ontario_holiday %}
+                            <span class="holiday-tag ontario-holiday-tag">Ontario</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div>
+                    {% if holiday.overlaps_vacation %}
+                    <span class="overlap-tag" data-tooltip="Already booked as vacation">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </span>
+                    {% elif holiday.is_adjacent_to_vacation %}
+                    <span class="adjacent-tag" data-tooltip="Can create long weekend with your existing vacation days!">
+                        <i class="bi bi-stars"></i>
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

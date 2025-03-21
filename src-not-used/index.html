@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacation Tracker</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Vacation Tracker</h1>
+    </header>
+    
+    <div class="row">
+      <!-- Main content area -->
+      <main class="col col-lg-9 col-md-8">
+        <section class="vacation-list">
+          <!-- Vacation cards will go here -->
+          <div class="vacation-card">
+            <div class="vacation-card__header">
+              <h2 class="vacation-card__title">Summer Vacation</h2>
+            </div>
+            
+            <div class="vacation-card__dates">
+              <span>July 15, 2023</span>
+              <span class="vacation-card__date-separator">→</span>
+              <span>July 25, 2023</span>
+            </div>
+            
+            <div class="vacation-card__details">
+              <span class="vacation-card__duration">10 days</span>
+              
+              <div class="tooltip-trigger">
+                <span class="vacation-card__tag">Long Weekend</span>
+                <div class="tooltip">Extends over a holiday long weekend</div>
+              </div>
+              
+              <div class="tooltip-trigger">
+                <span class="vacation-card__tag">+Holiday</span>
+                <div class="tooltip">Includes a bank holiday</div>
+              </div>
+            </div>
+            
+            <div class="vacation-card__footer">
+              <span>Approved</span>
+            </div>
+          </div>
+          
+          <!-- More vacation cards would go here -->
+        </section>
+      </main>
+      
+      <!-- Sidebar -->
+      <aside class="col col-lg-3 col-md-4">
+        <!-- Replace circle with progress bar -->
+        <div class="vacation-progress">
+          <div class="vacation-progress__header">
+            <h3 class="vacation-progress__title">Vacation Days Remaining</h3>
+            <span class="vacation-progress__value">12 / 20</span>
+          </div>
+          
+          <div class="vacation-progress__bar-container">
+            <div class="vacation-progress__bar" style="width: 60%;"></div>
+          </div>
+          
+          <div class="vacation-progress__labels">
+            <span>0</span>
+            <span>Used: 8</span>
+            <span>20</span>
+          </div>
+        </div>
+        
+        <!-- Sidebar calendar -->
+        <div class="sidebar-calendar">
+          <div class="calendar-header">July 2023</div>
+          <table>
+            <thead>
+              <tr>
+                <th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Calendar days would go here -->
+              <!-- Classes applied: vacation-day, bank-holiday, ontario-holiday -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Holiday type legend -->
+        <div class="holiday-legend">
+          <div class="holiday-indicator holiday-indicator--bank">Bank Holiday</div>
+          <div class="holiday-indicator holiday-indicator--ontario">Ontario Holiday</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  
+  <script src="scripts/main.js"></script>
+  <script src="scripts/tooltips.js"></script>
+</body>
+</html>

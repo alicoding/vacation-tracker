@@ -1,0 +1,30 @@
+<!-- Vacation Summary Card -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Vacation Balance</h5>
+        <div class="d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <p class="mb-0">Total Days: {{ total_days }}</p>
+                    <p class="mb-0">Days Used: {{ total_days - remaining_days }}</p>
+                    <h3 class="text-primary mb-0">Remaining: {{ remaining_days }} days</h3>
+                </div>
+            </div>
+            <div class="progress-container mt-2">
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar bg-primary" role="progressbar" 
+                         style="width: {{ progress_percentage }}%;" 
+                         aria-valuenow="{{ remaining_days }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="{{ total_days }}">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-1">
+                    <small class="text-muted">0</small>
+                    <small class="text-primary">{{ remaining_days }} remaining</small>
+                    <small class="text-muted">{{ total_days }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

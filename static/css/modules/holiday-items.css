@@ -1,0 +1,75 @@
+/* Holiday styles */
+
+/* Holiday tags */
+.holiday-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 0.3rem;
+}
+
+.bank-holiday-tag {
+    background-color: rgba(255, 153, 0, 0.15);
+    color: #ff9900;
+    border: 1px solid rgba(255, 153, 0, 0.3);
+}
+
+.ontario-holiday-tag {
+    background-color: rgba(138, 43, 226, 0.15);
+    color: #8a2be2;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+/* Holiday list styling */
+.holiday-list {
+    margin-top: 1.5rem;
+}
+
+.holiday-entry {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    background-color: white;
+    border-left: 3px solid transparent;
+    transition: transform 0.2s;
+}
+
+.holiday-entry:hover {
+    transform: translateY(-1px);
+}
+
+.bank-holiday {
+    border-left-color: #ff9900;
+    background-color: rgba(255, 153, 0, 0.05);
+}
+
+.ontario-holiday {
+    border-left-color: #8a2be2;
+    background-color: rgba(138, 43, 226, 0.05);
+}
+
+.holiday-vacation-overlap {
+    border-left: 3px dashed #198754;
+    background-color: rgba(25, 135, 84, 0.05);
+}
+
+.holiday-vacation-adjacent {
+    border-left: 3px dotted #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.holiday-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.holiday-adjacent {
+    border-left: 3px solid #ff9900;
+    padding-left: 0.75rem;
+    background-color: rgba(255, 153, 0, 0.05);
+    padding: 0.75rem;
+    border-radius: 6px;
+}

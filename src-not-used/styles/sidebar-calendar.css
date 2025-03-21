@@ -1,0 +1,68 @@
+.sidebar-calendar {
+  width: 100%;
+  font-size: 0.85rem;
+  pointer-events: none; /* Make calendar non-interactive */
+  user-select: none;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-calendar .calendar-header {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.sidebar-calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sidebar-calendar th {
+  font-weight: normal;
+  color: #777;
+  text-align: center;
+  padding: 3px 0;
+  font-size: 0.75rem;
+}
+
+.sidebar-calendar td {
+  padding: 2px;
+  text-align: center;
+  font-size: 0.75rem;
+  border-radius: 2px;
+}
+
+/* Event type indicators - subtle colors */
+.sidebar-calendar .vacation-day {
+  background-color: rgba(86, 130, 235, 0.2);
+}
+
+.sidebar-calendar .bank-holiday {
+  background-color: rgba(235, 86, 86, 0.15);
+}
+
+.sidebar-calendar .ontario-holiday {
+  background-color: rgba(86, 235, 133, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .sidebar-calendar {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-calendar {
+    max-width: 350px;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar-calendar {
+    font-size: 0.75rem;
+  }
+}

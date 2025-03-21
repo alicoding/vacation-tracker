@@ -1,0 +1,40 @@
+/* Utility classes */
+
+/* Position utilities */
+.position-relative {
+    position: relative !important;
+}
+
+.position-absolute {
+    position: absolute !important;
+}
+
+/* Ensure proper z-index for various elements */
+.z-index-high {
+    z-index: 1000 !important;
+}
+
+.z-index-higher {
+    z-index: 2000 !important;
+}
+
+.z-index-highest {
+    z-index: 10000 !important;
+}
+
+/* Helper for making elements fully opaque */
+.opacity-100 {
+    opacity: 1 !important;
+}
+
+/* Helper for hiding elements */
+.hidden {
+    display: none !important;
+}
+
+/* Helper for showing elements */
+.visible {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

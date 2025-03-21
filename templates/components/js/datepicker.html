@@ -1,0 +1,395 @@
+<script>
+    // Set progress bar width using JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBar = document.getElementById('vacation-progress-bar');
+        if (progressBar) {
+            progressBar.style.width = '{{ progress_percentage }}%';
+        }
+
+        // Get all the necessary data FIRST before any initializations
+        const holidayDatesElement = document.getElementById('holiday_dates');
+        const bookedDatesElement = document.getElementById('booked_dates');
+        const ontarioHolidaysElement = document.getElementById('ontario_holidays');
+        
+        // Parse JSON data safely with error handling
+        let holidayDates = [];
+        let bookedDates = [];
+        let ontarioHolidayDates = [];
+        
+        try {
+            if (holidayDatesElement && holidayDatesElement.value) {
+                holidayDates = JSON.parse(holidayDatesElement.value.replace(/&quot;/g, '"').replace(/&#34;/g, '"'));
+                console.log("Successfully parsed holiday dates:", holidayDates);
+            }
+        } catch (e) {
+            console.error('Error parsing holiday dates:', e);
+            console.log('Raw value:', holidayDatesElement.value);
+        }
+        
+        try {
+            if (bookedDatesElement && bookedDatesElement.value) {
+                bookedDates = JSON.parse(bookedDatesElement.value.replace(/&quot;/g, '"').replace(/&#34;/g, '"'));
+                console.log("Successfully parsed booked dates:", bookedDates);
+            }
+        } catch (e) {
+            console.error('Error parsing booked dates:', e);
+            console.log('Raw value:', bookedDatesElement.value);
+        }
+        
+        try {
+            if (ontarioHolidaysElement && ontarioHolidaysElement.value) {
+                ontarioHolidayDates = JSON.parse(ontarioHolidaysElement.value.replace(/&quot;/g, '"').replace(/&#34;/g, '"'));
+                console.log("Successfully parsed Ontario holidays:", ontarioHolidayDates);
+            }
+        } catch (e) {
+            console.error('Error parsing Ontario holidays:', e);
+            console.log('Raw value:', ontarioHolidaysElement.value);
+        }
+
+        // Make sure we have the date selector elements
+        const dateSelector = document.getElementById('date_selector');
+        const dateSelectorBtn = document.getElementById('date_selector_btn');
+        
+        if (!dateSelector || !dateSelectorBtn) {
+            console.error('Date selector input or button not found');
+            return;
+        }
+        
+        console.log("Initializing flatpickr for date selector");
+        
+        // Configure the flatpickr to show as a popup ONLY when clicked (initially hidden)
+        const datePicker = flatpickr(dateSelector, {
+            mode: "range",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            allowInput: true,
+            clickOpens: false, // Prevent automatic opening
+            disableMobile: false,
+            // Popup mode (not inline/static)
+            static: false,
+            inline: false,
+            // Position the calendar properly
+            position: "auto", 
+            positionElement: dateSelectorBtn,
+            
+            // Ensure calendar only opens on click, not on page load
+            onReady: function(selectedDates, dateStr, instance) {
+                // Force calendar closed on initial load
+                instance.close();
+            },
+            
+            // Update the button text when dates are selected
+            onChange: function(selectedDates, dateStr) {
+                const selectedDatesInput = document.getElementById('selected_dates');
+                const dateSelectorPlaceholder = dateSelectorBtn.querySelector('.date-selector-placeholder');
+                
+                if (selectedDates.length > 0) {
+                    // Update the hidden input with selected dates
+                    if (selectedDatesInput) {
+                        selectedDatesInput.value = JSON.stringify(
+                            selectedDates.map(date => date.toISOString().split('T')[0])
+                        );
+                    }
+                    
+                    // Update the button text with selected date range
+                    if (selectedDates.length === 1) {
+                        dateSelectorPlaceholder.textContent = formatDate(selectedDates[0]);
+                    } else if (selectedDates.length === 2) {
+                        dateSelectorPlaceholder.textContent = `${formatDate(selectedDates[0])} to ${formatDate(selectedDates[1])}`;
+                    }
+                    
+                    // Change the text color to indicate selection
+                    dateSelectorPlaceholder.style.color = '#212529';
+                }
+            },
+            
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+                const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                
+                // Apply classes for special dates (with checking if the arrays exist)
+                if (holidayDates && holidayDates.includes(dateStr)) {
+                    dayElem.className += " holiday";
+                }
+                
+                if (ontarioHolidayDates && ontarioHolidayDates.includes(dateStr)) {
+                    dayElem.className += " ontario-holiday";
+                }
+                
+                if (bookedDates && bookedDates.includes(dateStr)) {
+                    dayElem.className += " booked-day";
+                }
+                
+                // Add tooltips for special days
+                let tooltipText = [];
+                if (holidayDates && holidayDates.includes(dateStr)) {
+                    tooltipText.push("Bank Holiday");
+                }
+                if (ontarioHolidayDates && ontarioHolidayDates.includes(dateStr)) {
+                    tooltipText.push("Ontario Holiday");
+                }
+                if (bookedDates && bookedDates.includes(dateStr)) {
+                    tooltipText.push("Already booked");
+                }
+                
+                if (tooltipText.length > 0) {
+                    dayElem.setAttribute('data-tooltip', tooltipText.join(" & "));
+                }
+            }
+        });
+        
+        // Attach click handler to the button to open the calendar
+        dateSelectorBtn.addEventListener('click', function() {
+            if (datePicker && typeof datePicker.open === 'function') {
+                datePicker.open();
+            }
+        });
+        
+        // Format date helper function
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Style the date selector to look more like a button
+        if (dateSelector) {
+            dateSelector.style.backgroundColor = '#f8f9fa';
+            dateSelector.style.cursor = 'pointer';
+            dateSelector.style.transition = 'all 0.2s ease';
+        }
+        
+        // Remove any other event listeners to avoid conflicts
+        dateSelector.removeEventListener('click', dateSelector._clickEvent);
+        
+        // Use a simpler click handler that just opens the calendar
+        dateSelector.addEventListener('click', function(e) {
+            if (datePicker && typeof datePicker.open === 'function') {
+                datePicker.open();
+            }
+        });
+        
+        // Initialize Flatpickr date pickers for editing vacation
+        document.querySelectorAll('.edit-date-selector').forEach(function(input) {
+            const startDate = input.getAttribute('data-start');
+            const endDate = input.getAttribute('data-end');
+            const vacationId = input.getAttribute('data-id');
+            const inputId = input.id;
+            const hiddenInputId = 'edit_selected_dates' + inputId.substring(inputId.lastIndexOf('r') + 1);
+            const btnId = 'edit_selector_btn' + inputId.substring(inputId.lastIndexOf('r') + 1);
+            const editBtn = document.getElementById(btnId);
+            
+            const editPicker = flatpickr("#" + inputId, {
+                mode: "range",
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                defaultDate: [startDate, endDate],
+                // Also ensure edit calendars don't show on page load
+                inline: false,
+                static: false,
+                clickOpens: false, // Disable auto-open on click
+                
+                onChange: function(selectedDates, dateStr) {
+                    // Store the selected dates in the hidden input
+                    document.getElementById(hiddenInputId).value = JSON.stringify(
+                        selectedDates.map(date => date.toISOString().split('T')[0])
+                    );
+                    
+                    // Update the button text with selected date range
+                    if (editBtn && selectedDates.length > 0) {
+                        const placeholder = editBtn.querySelector('.date-selector-placeholder');
+                        if (placeholder) {
+                            if (selectedDates.length === 1) {
+                                placeholder.textContent = formatDate(selectedDates[0]);
+                            } else if (selectedDates.length === 2) {
+                                placeholder.textContent = `${formatDate(selectedDates[0])} to ${formatDate(selectedDates[1])}`;
+                            }
+                            // Change the text color to indicate selection
+                            placeholder.style.color = '#212529';
+                        }
+                    }
+                },
+                
+                onDayCreate: function(dObj, dStr, fp, dayElem) {
+                    // Add custom class to holiday and booked dates
+                    const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                    let tooltipText = [];
+                    
+                    if (holidayDates.includes(dateStr)) {
+                        dayElem.className += " holiday";
+                        tooltipText.push("Bank Holiday - Cannot be booked");
+                    }
+                    
+                    if (ontarioHolidayDates.includes(dateStr)) {
+                        dayElem.className += " ontario-holiday";
+                        tooltipText.push("Ontario Holiday");
+                    }
+                    
+                    // Check if this date is booked in a different vacation entry
+                    const isCurrentVacation = (dateStr >= startDate && dateStr <= endDate);
+                    if (bookedDates.includes(dateStr) && !isCurrentVacation) {
+                        dayElem.className += " booked-day";
+                        tooltipText.push("Already booked in another vacation entry");
+                    }
+                    
+                    // Set a descriptive tooltip
+                    if (tooltipText.length > 0) {
+                        dayElem.title = tooltipText.join("; ");
+                        dayElem.setAttribute('data-tooltip', tooltipText.join("; "));
+                    }
+                    
+                    // Handle overlap cases
+                    if ((holidayDates.includes(dateStr) || ontarioHolidayDates.includes(dateStr)) && 
+                        bookedDates.includes(dateStr) && !isCurrentVacation) {
+                        dayElem.className += " overlap-day";
+                    }
+                }
+            });
+            
+            // Set initial value
+            document.getElementById(hiddenInputId).value = JSON.stringify([startDate, endDate]);
+            
+            // Add click handler to the edit button to open calendar
+            if (editBtn) {
+                editBtn.addEventListener('click', function() {
+                    if (editPicker && typeof editPicker.open === 'function') {
+                        editPicker.open();
+                    }
+                });
+            }
+        });
+
+        // Add modal event handling to prevent click-through issues
+        document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.addEventListener('shown.bs.modal', function() {
+                // When modal is shown, ensure it captures all clicks
+                this.style.pointerEvents = 'auto';
+                
+                // Prevent the calendar from being cut off by the modal
+                // by ensuring the modal can contain the calendar dropdown
+                const modalBody = this.querySelector('.modal-body');
+                if (modalBody) {
+                    modalBody.style.overflow = 'visible';
+                }
+                
+                // Ensure the modal content captures clicks
+                const modalContent = this.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.addEventListener('click', function(e) {
+                        // Stop event from propagating beyond the modal content
+                        e.stopPropagation();
+                    });
+                }
+            });
+            
+            // Initialize each calendar in the modal with higher z-index
+            const editDateSelector = modal.querySelector('.edit-date-selector');
+            if (editDateSelector && editDateSelector._flatpickr) {
+                const calendar = editDateSelector._flatpickr.calendarContainer;
+                if (calendar) {
+                    calendar.style.zIndex = '1060';
+                }
+            }
+        });
+
+        // Add enhanced modal event handling to prevent click-through issues
+        document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.addEventListener('shown.bs.modal', function() {
+                // Force the backdrop to have the correct opacity and click handling
+                const backdrops = document.querySelectorAll('.modal-backdrop');
+                backdrops.forEach(backdrop => {
+                    backdrop.style.opacity = '0.7';
+                    backdrop.style.backgroundColor = '#000';
+                    backdrop.style.pointerEvents = 'all';
+                });
+                
+                // Prevent body scrolling and capture all clicks
+                document.body.style.overflow = 'hidden';
+                
+                // Ensure the modal content captures clicks
+                const modalContent = this.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.style.zIndex = '1055';
+                    modalContent.style.position = 'relative';
+                }
+            });
+            
+            // Reset body scroll when modal is hidden
+            modal.addEventListener('hidden.bs.modal', function() {
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Enhanced modal handling to completely block clicks
+        document.querySelectorAll('.full-opacity-modal').forEach(function(modal) {
+            modal.addEventListener('show.bs.modal', function() {
+                // Disable scrolling on body when modal opens
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+                
+                // Force the backdrop to be fully opaque
+                setTimeout(function() {
+                    const backdrops = document.querySelectorAll('.modal-backdrop');
+                    backdrops.forEach(backdrop => {
+                        backdrop.style.opacity = '0.85';
+                        backdrop.style.backgroundColor = '#000';
+                        backdrop.style.pointerEvents = 'all';
+                    });
+                }, 10);
+            });
+            
+            modal.addEventListener('hidden.bs.modal', function() {
+                // Re-enable scrolling on body when modal closes
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            });
+        });
+
+        // Enhanced modal handling with accessibility and backdrop fixes
+        document.querySelectorAll('.full-opacity-modal').forEach(function(modal) {
+            modal.addEventListener('show.bs.modal', function(event) {
+                // Disable scrolling on body when modal opens
+                document.body.style.overflow = 'hidden';
+                
+                // Force remove aria-hidden attribute for accessibility
+                this.removeAttribute('aria-hidden');
+            });
+            
+            modal.addEventListener('shown.bs.modal', function(event) {
+                // Force remove aria-hidden attribute for accessibility
+                this.removeAttribute('aria-hidden');
+                
+                // Ensure the backdrop is fully opaque
+                const backdrops = document.querySelectorAll('.modal-backdrop');
+                backdrops.forEach(backdrop => {
+                    backdrop.style.opacity = '0.9';
+                    backdrop.style.backgroundColor = '#000';
+                });
+                
+                // Display the custom backdrop
+                const customBackdrop = this.querySelector('.custom-modal-backdrop');
+                if (customBackdrop) {
+                    customBackdrop.style.display = 'block';
+                }
+                
+                // Set focus to the first focusable element (usually the close button)
+                const focusableElements = this.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                if (focusableElements.length) {
+                    focusableElements[0].focus();
+                }
+            });
+            
+            modal.addEventListener('hidden.bs.modal', function(event) {
+                // Re-enable scrolling on body when modal closes
+                
+                document.body.style.overflow = '';
+                
+                // Hide the custom backdrop
+                const customBackdrop = this.querySelector('.custom-modal-backdrop');
+                if (customBackdrop) {
+                    customBackdrop.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

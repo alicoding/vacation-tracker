@@ -1,0 +1,90 @@
+.vacation-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.vacation-card:hover {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.vacation-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.vacation-card__title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  color: #333;
+}
+
+.vacation-card__dates {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.vacation-card__date-separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.vacation-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.vacation-card__tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.vacation-card__duration {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #f0f4f9;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #446;
+}
+
+.vacation-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .vacation-card__header {
+    flex-direction: column;
+  }
+  
+  .vacation-card__details {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,130 @@
+/* Vacation item styles */
+
+.vacation-list {
+    margin-top: 1.5rem;
+}
+
+.vacation-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vacation-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.date-range-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+/* Improved button styling */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.action-buttons .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 4px;
+}
+
+/* Consistent day count badge */
+.day-count-badge {
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+/* Feature tags instead of large badges */
+.feature-tags {
+    display: inline-flex;
+    gap: 0.35rem;
+}
+
+.feature-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    cursor: help;
+}
+
+.feature-tag:hover {
+    background-color: #e9ecef;
+}
+
+/* Continuous period highlighting */
+.continuous-period {
+    font-size: 0.85rem;
+    color: #495057;
+    margin-top: 0.5rem;
+}
+
+.highlight {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid #0d6efd;
+}
+
+/* Overlap tag */
+.overlap-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.8rem;
+    color: #198754;
+    cursor: help;
+}
+
+/* Adjacent to vacation tag */
+.adjacent-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.8rem;
+    color: #0d6efd;
+    cursor: help;
+    position: relative;
+}
+
+.adjacent-tag::after {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}

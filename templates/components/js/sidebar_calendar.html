@@ -1,0 +1,72 @@
+<script>
+    // Initialize the sidebar calendar
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarContainer = document.getElementById('sidebar-calendar-container');
+        const calendarInput = document.getElementById('sidebar-calendar-input');
+        
+        if (!calendarContainer || !calendarInput) return;
+        
+        // Parse data attributes
+        let bookedDates = [];
+        let holidays = [];
+        let ontarioHolidays = [];
+        
+        try {
+            bookedDates = JSON.parse(calendarContainer.dataset.bookedDates || '[]');
+            holidays = JSON.parse(calendarContainer.dataset.holidays || '[]');
+            ontarioHolidays = JSON.parse(calendarContainer.dataset.ontarioHolidays || '[]');
+        } catch (e) {
+            console.error('Error parsing calendar data:', e);
+        }
+        
+        // Initialize the calendar
+        const sidebarCalendar = flatpickr(calendarInput, {
+            inline: true,
+            static: true,
+            defaultDate: 'today',
+            enableTime: false,
+            dateFormat: 'Y-m-d',
+            showMonths: 1,
+            prevArrow: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17"><path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z"></path></svg>',
+            nextArrow: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17"><path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z"></path></svg>',
+            
+            // Add classes to view-only calendar
+            onReady: function(selectedDates, dateStr, instance) {
+                instance.calendarContainer.classList.add('view-only-calendar');
+                
+                // Apply background color to the entire calendar by moving it into the container
+                const calendarWrapper = document.querySelector('.sidebar-calendar-wrapper');
+                if (calendarWrapper && instance.calendarContainer) {
+                    // Move calendar to inside our container to inherit the grey background
+                    calendarWrapper.appendChild(instance.calendarContainer);
+                    
+                    // Add background to all calendar parts
+                    const allCalendarParts = instance.calendarContainer.querySelectorAll('.flatpickr-months, .flatpickr-weekdays, .flatpickr-days');
+                    allCalendarParts.forEach(part => {
+                        part.style.backgroundColor = 'transparent';
+                    });
+                }
+            },
+            
+            // Customize calendar days
+            onDayCreate: function(dObj, dStr, fp, dayElem) {
+                const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                
+                if (holidays.includes(dateStr)) {
+                    dayElem.classList.add('holiday');
+                    dayElem.setAttribute('data-tooltip', 'Bank Holiday');
+                }
+                
+                if (ontarioHolidays.includes(dateStr)) {
+                    dayElem.classList.add('ontario-holiday');
+                    dayElem.setAttribute('data-tooltip', 'Ontario Holiday');
+                }
+                
+                if (bookedDates.includes(dateStr)) {
+                    dayElem.classList.add('booked-day');
+                    dayElem.setAttribute('data-tooltip', 'Vacation Day');
+                }
+            }
+        });
+    });
+</script>

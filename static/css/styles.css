@@ -1,0 +1,239 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 800px;
+    margin-top: 2rem;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Enhanced sidebar styling */
+.sidebar {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+}
+
+.sidebar h3 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Vacation entry styling */
+.vacation-entry {
+    margin-bottom: 15px;
+    padding: 12px;
+    border-left: 4px solid #3498db;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.vacation-entry:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.vacation-entry .dates {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.vacation-entry .description {
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.vacation-entry .meta-info {
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Special indicators with improved styling */
+.long-weekend-indicator, .holiday-adjacent-indicator, .overlap-indicator {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.long-weekend-indicator {
+    background-color: #e8f5fe;
+    color: #1976d2;
+    border: 1px solid #bbdefb;
+}
+
+.holiday-adjacent-indicator {
+    background-color: #fff8e1;
+    color: #ff8f00;
+    border: 1px solid #ffe082;
+}
+
+.overlap-indicator {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+/* Date picker styles */
+.date-picker {
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.legend-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.legend-swatch.booked-date {
+    background-color: #c8e6c9;
+    border: 1px solid #81c784;
+}
+
+.legend-swatch.holiday-date {
+    background-color: #ffe0b2;
+    border: 1px solid #ffb74d;
+}
+
+.legend-swatch.overlap-date {
+    background: linear-gradient(135deg, #c8e6c9 50%, #ffe0b2 50%);
+    border: 1px solid #aaa;
+}
+
+.calendar-legend {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Tooltip styling */
+.date-tooltip {
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Holiday entry styling */
+.holiday-entry {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.holiday-entry:last-child {
+    border-bottom: none;
+}
+
+.holiday-entry:hover {
+    background-color: #f9f9f9;
+}
+
+.holiday-entry .date {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.holiday-entry .description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.bank-holiday {
+    border-left: 3px solid #ff9900;
+    padding-left: 10px;
+    background-color: rgba(255, 153, 0, 0.05);
+}
+
+.bank-holiday-indicator {
+    background-color: #ff9900;
+    color: white;
+    font-size: 0.7rem;
+    padding: 1px 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+/* Holiday-vacation overlap styling */
+.holiday-vacation-overlap {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-right: 3px solid #4caf50;
+}
+
+.holiday-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Flatpickr date picker customization */
+.flatpickr-calendar {
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1) !important;
+    border-radius: 8px !important;
+}
+
+.flatpickr-day.booked-date {
+    background-color: #c8e6c9 !important;
+    border-color: #a5d6a7 !important;
+    color: #2e7d32 !important;
+}
+
+.flatpickr-day.holiday-date {
+    background-color: #ffe0b2 !important;
+    border-color: #ffcc80 !important;
+    color: #e65100 !important;
+}
+
+.flatpickr-day.overlap-date {
+    background: linear-gradient(135deg, #c8e6c9 50%, #ffe0b2 50%) !important;
+    border-color: #999 !important;
+}
+
+.flatpickr-day:hover {
+    background-color: #e3f2fd !important;
+}
+
+/* Progress bar */
+.circular-progress {
+    width: 100px;
+    height: 100px;
+}

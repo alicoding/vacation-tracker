@@ -1,0 +1,314 @@
+/* Calendar styles */
+
+/* Calendar styling improvements */
+.flatpickr-day {
+    border-radius: 4px !important;
+}
+
+.holiday {
+    background-color: rgba(255, 153, 0, 0.15) !important;
+    border-color: rgba(255, 153, 0, 0.3) !important;
+    color: #ff9900 !important;
+    font-weight: 600 !important;
+}
+
+.ontario-holiday {
+    background-color: rgba(138, 43, 226, 0.15) !important; 
+    border-color: rgba(138, 43, 226, 0.3) !important;
+    color: #8a2be2 !important;
+    font-weight: 600 !important;
+}
+
+.booked-day {
+    background-color: rgba(25, 135, 84, 0.15) !important;
+    border-color: rgba(25, 135, 84, 0.3) !important;
+    color: #198754 !important;
+    font-weight: 600 !important;
+}
+
+.overlap-day {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.2) 0%, rgba(255, 153, 0, 0.2) 49%, rgba(25, 135, 84, 0.2) 51%, rgba(25, 135, 84, 0.2) 100%) !important;
+    border: 1px dashed #6c757d !important;
+    font-weight: 600 !important;
+}
+
+/* Calendar container styling */
+.sidebar-calendar-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+}
+
+#sidebar-calendar-container {
+    position: relative;
+    min-height: auto;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Make the calendar container take the full width of its parent */
+.sidebar-calendar-wrapper .flatpickr-calendar {
+    width: 100% !important;
+    max-width: 100% !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: none !important;
+    box-sizing: border-box;
+}
+
+/* Additional fixes for calendar positioning */
+.sidebar-calendar-wrapper .flatpickr-months,
+.sidebar-calendar-wrapper .flatpickr-weekdays,
+.sidebar-calendar-wrapper .flatpickr-days {
+    background-color: transparent !important;
+}
+
+.sidebar-calendar-wrapper .flatpickr-innerContainer {
+    width: 100% !important;
+    background-color: transparent !important;
+}
+
+/* Ensure the flatpickr calendar stays within its container */
+.sidebar-calendar-container .flatpickr-calendar {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+.sidebar-calendar-container .flatpickr-rContainer,
+.sidebar-calendar-container .flatpickr-days,
+.sidebar-calendar-container .dayContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* Make flatpickr days size appropriately */
+.sidebar-calendar-container .flatpickr-day {
+    max-width: 14.28% !important;
+    flex-basis: 14.28% !important;
+    height: 35px !important;
+    line-height: 35px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Calendar legend */
+.calendar-legend {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 0.85rem;
+}
+
+.legend-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.legend-swatch.booked-date {
+    background-color: rgba(25, 135, 84, 0.15);
+    border: 1px solid rgba(25, 135, 84, 0.3);
+}
+
+.legend-swatch.holiday-date {
+    background-color: rgba(255, 153, 0, 0.15);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+}
+
+.legend-swatch.ontario-holiday-date {
+    background-color: rgba(138, 43, 226, 0.15);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.legend-swatch.overlap-date {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.2) 0%, rgba(255, 153, 0, 0.2) 49%, rgba(25, 135, 84, 0.2) 51%, rgba(25, 135, 84, 0.2) 100%);
+    border: 1px dashed #6c757d;
+}
+
+/* View-only calendar styling - improved */
+.view-only-calendar {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+.view-only-calendar .flatpickr-days {
+    pointer-events: auto;
+}
+
+.view-only-calendar .flatpickr-day {
+    cursor: default !important;
+}
+
+.view-only-calendar .flatpickr-day.booked-date {
+    background-color: rgba(25, 135, 84, 0.15) !important;
+    border-color: rgba(25, 135, 84, 0.3) !important;
+    color: #198754 !important;
+}
+
+.view-only-calendar .flatpickr-day.holiday-date {
+    background-color: rgba(255, 153, 0, 0.15) !important;
+    border-color: rgba(255, 153, 0, 0.3) !important;
+    color: #ff9900 !important;
+}
+
+.view-only-calendar .flatpickr-day.ontario-holiday-date {
+    background-color: rgba(138, 43, 226, 0.15) !important;
+    border-color: rgba(138, 43, 226, 0.3) !important;
+    color: #8a2be2 !important;
+}
+
+/* Specific Mac optimizations for Flatpickr */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /* Target Safari/Chrome on Mac */
+    .sidebar-calendar-container .flatpickr-calendar {
+        font-size: 90%; /* Slightly smaller font for Mac */
+    }
+    
+    .sidebar-calendar-container .flatpickr-day {
+        height: 32px !important;
+        line-height: 32px !important;
+        margin: 1px !important; /* Add a bit of margin between days */
+    }
+    
+    /* Add more padding to the sidebar on Mac */
+    .sidebar {
+        padding: 1.5rem;
+    }
+}
+
+/* Fix flatpickr input issues */
+.flatpickr-input:not(.active) {
+    display: none !important;
+}
+
+/* Hide empty flatpickr-wrapper elements */
+.flatpickr-wrapper:empty {
+    display: none !important;
+}
+
+/* Force flatpickr month container to be responsive */
+.flatpickr-month {
+    overflow: visible !important;
+    padding: 0 0.5rem;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 28px !important;
+}
+
+.flatpickr-current-month {
+    padding-top: 0 !important;
+    display: flex !important;
+    visibility: visible !important;
+    height: auto !important;
+    width: auto !important;
+    position: relative !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+}
+
+.flatpickr-current-month .cur-month {
+    display: inline !important;
+    visibility: visible !important;
+    font-weight: bold !important;
+}
+
+/* Hide the input that can cause layout issues */
+.flatpickr-current-month input.cur-year {
+    font-weight: bold !important;
+}
+
+/* Ensure month navigation arrows are visible */
+.flatpickr-prev-month, .flatpickr-next-month {
+    padding: 3px !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Ensure days flex properly */
+.flatpickr-days {
+    width: 100% !important;
+}
+
+.dayContainer {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+}
+
+/* Make all calendars visible */
+.flatpickr-calendar {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* Clear out duplicate flatpickr elements */
+.flatpickr-calendar + .flatpickr-calendar {
+    display: none !important;
+}
+
+/* Hide the actual flatpickr input */
+.date-selector-wrapper .flatpickr-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    border: 0;
+    position: absolute;
+}
+
+/* Calendar specific for the date selector (non-static mode) */
+#date_selector + .flatpickr-calendar {
+    position: absolute !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    box-shadow: 0 3px 13px rgba(0,0,0,0.15) !important;
+    margin-top: 2px !important;
+    background-color: white !important;
+}
+
+/* Override any fixed positioning for popup calendars */
+.flatpickr-calendar:not(.inline):not(.static) {
+    position: absolute !important;
+    animation: fpFadeInDown .3s cubic-bezier(.23, 1, .32, 1) !important;
+}
+
+/* Ensure proper z-index for all calendars */
+.flatpickr-calendar {
+    z-index: 9999 !important;
+}
+
+/* Calendar container shadow */
+.flatpickr-calendar {
+    box-shadow: 0 3px 13px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Make the calendar always hidden initially */
+.flatpickr-calendar:not(.open):not(.inline) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Make sure date picker calendar is visible when open */
+.flatpickr-calendar.open:not(.inline) {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
+}

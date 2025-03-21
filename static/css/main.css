@@ -1,0 +1,25 @@
+/* Main CSS file - Imports all modules */
+
+/* Import base styles */
+@import '/static/css/modules/base.css';
+
+/* Import layout components */
+@import '/static/css/modules/layout.css';
+
+/* Import vacation components */
+@import '/static/css/modules/vacation-items.css';
+
+/* Import holiday components */
+@import '/static/css/modules/holiday-items.css';
+
+/* Import calendar styles */
+@import '/static/css/modules/calendar.css';
+
+/* Import modal styles */
+@import '/static/css/modules/modals.css';
+
+/* Import form components */
+@import '/static/css/modules/forms.css';
+
+/* Import utilities */
+@import '/static/css/modules/utilities.css';

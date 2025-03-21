@@ -1,0 +1,85 @@
+/* Form styling */
+
+/* Improved date selector styling */
+.date-selector-wrapper {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.date-selector-button {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    padding-right: 30px !important; /* Space for the icon */
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    color: #212529;
+}
+
+.date-selector-button:hover {
+    background-color: #e9ecef !important;
+}
+
+.date-selector-placeholder {
+    color: #6c757d;
+}
+
+/* Improved button styling for selectors */
+#date_selector {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    padding-right: 30px !important; /* Space for the icon */
+}
+
+#date_selector:hover {
+    background-color: #e9ecef !important;
+}
+
+/* Edit date selector styling */
+.edit-selector-btn {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    padding-right: 30px !important; /* Space for the icon */
+    color: #212529; /* Default text color for the initial dates */
+}
+
+.edit-selector-btn:hover {
+    background-color: #e9ecef !important;
+}
+
+/* Hide the actual edit flatpickr input */
+.date-selector-wrapper .edit-date-selector {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    border: 0;
+    position: absolute;
+}
+
+/* Make regular flatpickr inputs work properly */
+.flatpickr-input {
+    background-color: #fff !important;
+    cursor: pointer !important;
+}
+
+/* Add a button-like appearance for edit date selectors too */
+.edit-date-selector {
+    background-color: #f8f9fa !important;
+    border: 1px solid #ced4da !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.edit-date-selector:hover {
+    background-color: #e9ecef !important;
+}

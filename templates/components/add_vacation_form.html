@@ -1,0 +1,66 @@
+<!-- Add Vacation Form -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            <i class="bi bi-calendar-plus me-1"></i> Add Vacation Days
+        </h5>
+        <form action="{{ url_for('main.add_vacation') }}" method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <!-- Updated date selector with button appearance -->
+                    <div class="date-selector-wrapper position-relative">
+                        <button type="button" class="form-control text-start date-selector-button" id="date_selector_btn">
+                            <span class="date-selector-placeholder">Click to select date(s)</span>
+                            <i class="bi bi-calendar3 position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                        </button>
+                        <input type="text" class="flatpickr-input" id="date_selector" name="date_selector" required autocomplete="off">
+                    </div>
+                    
+                    <div class="date-range-description">
+                        <i class="bi bi-info-circle me-1"></i> Select a single date or a range of dates (click and drag)
+                    </div>
+                    <div class="calendar-legend mt-2">
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="legend-swatch holiday-date me-2"></div>
+                            <div class="small">Bank Holidays cannot be booked</div>
+                        </div>
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="legend-swatch ontario-holiday-date me-2"></div>
+                            <div class="small">Ontario Holidays for reference</div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="legend-swatch booked-date me-2"></div>
+                            <div class="small">Already booked days</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden fields to store actual date values with proper escaping -->
+                    <input type="hidden" id="selected_dates" name="selected_dates">
+                    <input type="hidden" id="holiday_dates" value='{{ holiday_dates_json|safe }}'>
+                    <input type="hidden" id="ontario_holidays" value='{{ ontario_holidays_json|default("[]")|safe }}'>
+                    <input type="hidden" id="booked_dates" value='{{ booked_dates_json|safe }}'>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="note" class="form-label">
+                        <i class="bi bi-chat-left-text me-1"></i> Note (Optional)
+                    </label>
+                    <input type="text" class="form-control" id="note" name="note" placeholder="Purpose of vacation">
+                    <div class="highlight mt-3">
+                        <div class="small mb-2">
+                            <i class="bi bi-lightbulb me-1"></i> <strong>Pro tip:</strong> Booking vacation days adjacent to weekends or holidays can maximize your time off.
+                        </div>
+                        <div class="small">
+                            <i class="bi bi-check-circle me-1"></i> The system automatically identifies long weekends and holiday-adjacent vacations.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-calendar-plus me-1"></i> Add Vacation Day(s)
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

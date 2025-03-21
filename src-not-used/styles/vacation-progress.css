@@ -1,0 +1,64 @@
+.vacation-progress {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background-color: #f9f9fb;
+}
+
+.vacation-progress__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.vacation-progress__title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  margin: 0;
+}
+
+.vacation-progress__value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334;
+}
+
+.vacation-progress__bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.vacation-progress__bar {
+  height: 100%;
+  background-color: #5682eb;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.vacation-progress__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Bar color variations */
+.vacation-progress__bar--low {
+  background-color: #eb5656;
+}
+
+.vacation-progress__bar--medium {
+  background-color: #ebca56;
+}
+
+.vacation-progress__bar--high {
+  background-color: #56eb85;
+}

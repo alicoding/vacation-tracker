@@ -1,0 +1,71 @@
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  padding: 8px 12px;
+  font-size: 14px;
+  max-width: 250px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  visibility: hidden; /* Add visibility control */
+  overflow: visible; /* Ensure content can overflow */
+}
+
+.tooltip-trigger {
+  position: relative;
+  overflow: visible; /* Allow tooltips to escape container */
+}
+
+.tooltip-trigger:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
+/* Prevent nested tooltips from appearing */
+.tooltip .tooltip {
+  display: none;
+}
+
+/* Position variants for tooltips */
+.tooltip-top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+}
+
+.tooltip-bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+}
+
+.tooltip-left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+}
+
+.tooltip-right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 8px;
+}
+
+/* Fix for calendar tooltips specifically */
+.calendar-container .tooltip {
+  position: fixed; /* Use fixed positioning instead of absolute for calendar tooltips */
+  z-index: 1500; /* Higher z-index to ensure it's above other elements */
+}

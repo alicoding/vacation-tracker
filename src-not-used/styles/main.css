@@ -1,0 +1,105 @@
+/* Import component styles */
+@import 'tooltips.css';
+@import 'sidebar-calendar.css';
+@import 'vacation-cards.css';
+@import 'vacation-progress.css';
+
+/* Global responsive styles */
+:root {
+  --primary-color: #5682eb;
+  --danger-color: #eb5656;
+  --success-color: #56eb85;
+  --warning-color: #ebca56;
+  --text-color: #333;
+  --text-secondary: #777;
+  --background-light: #f8f9fa;
+  --border-color: rgba(0,0,0,0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+/* Holiday type indicators */
+.holiday-indicator {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-right: 8px;
+}
+
+.holiday-indicator::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.holiday-indicator--bank::before {
+  background-color: rgba(235, 86, 86, 0.7);
+}
+
+.holiday-indicator--ontario::before {
+  background-color: rgba(86, 235, 133, 0.7);
+}
+
+/* Responsive breakpoints */
+@media (min-width: 576px) {
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  .col-lg-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+}

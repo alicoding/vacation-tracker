@@ -1,0 +1,115 @@
+/* Modal styles */
+
+/* Modal improvements to prevent click-through issues */
+.modal {
+    z-index: 1050 !important; /* Ensure modal is above other elements */
+}
+
+/* Fix the backdrop opacity and click handling */
+.modal-backdrop {
+    z-index: 1040 !important; /* Backdrop just behind the modal */
+    opacity: 0.85 !important;  /* Make backdrop more opaque */
+    background-color: #000 !important; /* Ensure it's black */
+    pointer-events: all !important;
+}
+
+/* Make modal backdrop fully cover the screen */
+.modal-backdrop.show {
+    opacity: 0.85 !important;
+    pointer-events: all !important; /* This ensures clicks are captured by the backdrop */
+}
+
+/* Improve modal content appearance */
+.modal-content {
+    box-shadow: 0 5px 15px rgba(0,0,0,.5) !important;
+    border: 1px solid rgba(0,0,0,.2) !important;
+    position: relative !important;
+    z-index: 1055 !important; /* Higher than the backdrop */
+}
+
+/* Ensure modal dialog captures pointer events */
+.modal.show .modal-dialog {
+    pointer-events: all !important;
+    position: relative !important;
+    z-index: 2000 !important; /* Much higher than other elements */
+}
+
+/* Make the modal body have visible overflow for flatpickr */
+.modal-body {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Prevent any interactions with elements behind the modal */
+.modal.show {
+    pointer-events: auto !important;
+}
+
+/* Add a higher z-index to calendar when in modal */
+.modal .flatpickr-calendar {
+    z-index: 1060 !important; /* Higher than the modal itself */
+}
+
+/* Make sure the edit form is above other elements */
+.edit-form {
+    position: relative;
+    z-index: 1;
+}
+
+/* Custom fully opaque backdrop */
+.custom-modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    background-color: #000;
+    opacity: 0.9 !important; /* Very dark backdrop */
+    pointer-events: all !important;
+    display: none; /* Initially hidden */
+}
+
+/* Show the custom backdrop when modal is active */
+.modal.show .custom-modal-backdrop {
+    display: block;
+}
+
+/* Ensure modals don't have aria-hidden when shown */
+.modal.show {
+    aria-hidden: false !important;
+}
+
+/* Override Bootstrap's default modal styling for accessibility */
+.modal.show[aria-hidden="true"] {
+    aria-hidden: false !important;
+}
+
+/* Fixed modal dialog positioning */
+.full-opacity-modal .modal-dialog {
+    z-index: 1056 !important;
+    position: relative !important;
+    margin: 1.75rem auto !important;
+    pointer-events: all !important;
+}
+
+/* Fixed modal content with higher stacking context */
+.full-opacity-modal .modal-content {
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+    z-index: 1057 !important;
+    position: relative !important;
+    background-color: #fff !important;
+}
+
+/* Make any flatpickr calendar inside the modal visible above all other elements */
+.full-opacity-modal .flatpickr-calendar {
+    z-index: 10000 !important;
+}
+
+/* Prevent scrolling on the body when modal is open */
+body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+}

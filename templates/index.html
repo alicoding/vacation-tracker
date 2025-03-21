@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <!-- Vacation Summary Card -->
+    {% include 'components/vacation_summary.html' %}
+    
+    <!-- Add Vacation Form -->
+    {% include 'components/add_vacation_form.html' %}
+    
+    <div class="row">
+        <!-- More responsive column sizing with larger sidebar on large screens -->
+        <div class="col-lg-6 col-md-7">
+            <!-- Vacation List -->
+            {% include 'components/vacation_list.html' %}
+        </div>
+        
+        <div class="col-lg-6 col-md-5">
+            <!-- Sidebar with calendar and holidays -->
+            {% include 'components/sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {% include 'components/js/datepicker.html' %}
+    {% include 'components/js/sidebar_calendar.html' %}
+{% endblock %}
